@@ -4,6 +4,7 @@ package main
 
 import (
 	"context"
+	"io/ioutil"
 	"log"
 
 	"github.com/chromedp/chromedp"
@@ -25,6 +26,7 @@ func main() {
 		//chromedp.WithDebugf(log.Printf),
 	)
 	defer cancel()
+	var buf []byte
 
 	// run task list
 	var res string
@@ -32,10 +34,13 @@ func main() {
 	path = "#react-root > section > main > div > header > div > div > span > img"
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(`https://www.instagram.com/malangjualrumah/`),
-		chromedp.WaitVisible(path),
+		chromedp.FullScreenshot(&buf, 60),
 		chromedp.Evaluate("document.querySelector('"+path+"').src", &res),
 	)
 	if err != nil {
+		log.Fatal(err)
+	}
+	if err := ioutil.WriteFile("fullScreenshot.png", buf, 0o644); err != nil {
 		log.Fatal(err)
 	}
 
