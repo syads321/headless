@@ -7,6 +7,8 @@ import (
 	"io/ioutil"
 	"log"
 
+	"time"
+
 	"github.com/chromedp/chromedp"
 )
 
@@ -34,7 +36,9 @@ func main() {
 	//path = "#react-root > section > main > div > header > div > div > span > img"
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(`https://www.instagram.com/malangjualrumah/`),
-		chromedp.FullScreenshot(&buf, 60),
+		RunWithTimeOut(&ctx, 10, chromedp.Tasks{
+			chromedp.FullScreenshot(&buf, 60),
+		}),
 		//chromedp.Evaluate("document.querySelector('"+path+"').src", &res),
 	)
 	if err != nil {
@@ -45,4 +49,12 @@ func main() {
 	}
 
 	log.Printf("window object keys: %v", res)
+}
+
+func RunWithTimeOut(ctx *context.Context, timeout time.Duration, tasks chromedp.Tasks) chromedp.ActionFunc {
+	return func(ctx context.Context) error {
+		timeoutContext, cancel := context.WithTimeout(ctx, timeout*time.Second)
+		defer cancel()
+		return tasks.Do(timeoutContext)
+	}
 }
