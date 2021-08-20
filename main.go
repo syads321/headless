@@ -30,12 +30,12 @@ func main() {
 
 	// run task list
 	var res string
-	var path string
-	path = "#react-root > section > main > div > header > div > div > span > img"
+	//var path string
+	//path = "#react-root > section > main > div > header > div > div > span > img"
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(`https://www.instagram.com/malangjualrumah/`),
 		chromedp.FullScreenshot(&buf, 60),
-		chromedp.Evaluate("document.querySelector('"+path+"').src", &res),
+		//chromedp.Evaluate("document.querySelector('"+path+"').src", &res),
 	)
 	if err != nil {
 		log.Fatal(err)
