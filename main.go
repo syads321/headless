@@ -35,7 +35,7 @@ func main() {
 	//var path string
 	//path = "#react-root > section > main > div > header > div > div > span > img"
 	err := chromedp.Run(ctx,
-		chromedp.Navigate(`https://www.instagram.com/pktabah/`),
+		chromedp.Navigate(`https://www.instagram.com/pktabah/?__a=1`),
 		RunWithTimeOut(&ctx, 50, chromedp.Tasks{
 			chromedp.FullScreenshot(&buf, 60),
 		}),
@@ -44,7 +44,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := ioutil.WriteFile("fullScreenshot.png", buf, 0o644); err != nil {
+	if err := ioutil.WriteFile("fullScreenshot2.png", buf, 0o644); err != nil {
 		log.Fatal(err)
 	}
 
