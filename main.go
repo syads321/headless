@@ -35,7 +35,7 @@ func main() {
 	//var path string
 	//path = "#react-root > section > main > div > header > div > div > span > img"
 	err := chromedp.Run(ctx,
-		chromedp.Navigate(`https://www.instagram.com/malangjualrumah/`),
+		chromedp.Navigate(`https://www.instagram.com/pktabah/`),
 		RunWithTimeOut(&ctx, 10, chromedp.Tasks{
 			chromedp.FullScreenshot(&buf, 60),
 		}),
