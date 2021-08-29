@@ -18,7 +18,7 @@ func main() {
 		// set up a proxy (such as Fiddler) and uncomment the next two lines to see the network requests if it still does not work.
 		//chromedp.ProxyServer("localhost:8866"),
 		//chromedp.Flag("ignore-certificate-errors", true),
-		chromedp.UserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.106 Safari/537.36"),
+		chromedp.UserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"),
 	)
 	ctx, cancel := chromedp.NewExecAllocator(context.Background(), opts...)
 	defer cancel()
@@ -36,7 +36,7 @@ func main() {
 	//path = "#react-root > section > main > div > header > div > div > span > img"
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(`https://www.instagram.com/pktabah/`),
-		RunWithTimeOut(&ctx, 10, chromedp.Tasks{
+		RunWithTimeOut(&ctx, 50, chromedp.Tasks{
 			chromedp.FullScreenshot(&buf, 60),
 		}),
 		//chromedp.Evaluate("document.querySelector('"+path+"').src", &res),
